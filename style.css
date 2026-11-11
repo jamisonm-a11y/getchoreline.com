@@ -99,6 +99,16 @@ img, svg { display: block; }
   border-radius: 58% 42% 55% 45% / 52% 58% 42% 48%; }
 .keeps dd { margin: 8px 0 0; color: var(--gray); }
 
+.price { position: relative; padding-block: 20px 100px; }
+.price .plans { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; max-width: 720px; }
+.price .plan { padding: 34px 36px; background: var(--mist); border-radius: 48px 70px 52px 80px / 60px 48px 74px 52px; }
+.price .plan.best { background: var(--blue); color: #fff; }
+.price .amount { margin: 0; font-size: clamp(2.4rem, 4vw, 3.2rem); font-weight: 500; line-height: 1.05; }
+.price .per { margin: 6px 0 0; font-size: 1.15rem; }
+.price .plan:not(.best) .per { color: var(--gray); }
+.price .terms { color: var(--gray); max-width: 60ch; margin: 28px 0 0; }
+.price .founding { max-width: 60ch; margin: 20px 0 0; padding: 18px 24px; background: color-mix(in srgb, var(--sun) 28%, #fff); border-radius: 28px; }
+
 /* Your records stay yours */
 .yours { position: relative; padding-block: 40px 120px; overflow: clip; }
 .yours .card { position: relative; padding: 90px 80px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: 40px; align-items: center; }
@@ -143,6 +153,7 @@ img, svg { display: block; }
 
 /* Phones */
 @media (max-width: 760px) {
+  .price .plans { grid-template-columns: 1fr; }
   .site-head nav { display: none; }
   .head-blob { width: 170px; height: 120px; right: -60px; top: -60px; }
   .button.outline { min-height: 44px; padding: 0 20px; font-size: 0.8rem; }
