@@ -41,7 +41,7 @@ img, svg { display: block; }
 
 /* Buttons: pills, spaced capitals */
 .button {
-  display: inline-flex; align-items: center; justify-content: center; min-height: 58px; padding: 0 40px;
+  white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; min-height: 58px; padding: 0 40px;
   border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.14em; text-transform: uppercase;
 }
 .button.solid { background: #fff; color: var(--ink); box-shadow: 0 10px 30px rgba(20, 24, 80, 0.25); }
@@ -53,7 +53,6 @@ img, svg { display: block; }
 
 /* Hero */
 .hero { position: relative; min-height: 940px; overflow: hidden; margin-top: -96px; padding-top: 96px; }
-.hero .b-blue { width: min(820px, 64vw); height: 700px; left: max(-90px, -6vw); top: 110px; background: var(--blue); z-index: 2; border-radius: 52% 48% 46% 54% / 44% 50% 50% 56%; }
 .hero .b-teal { width: 420px; height: 360px; left: 44%; top: 210px; background: var(--teal); z-index: 1; border-radius: 60% 40% 50% 50% / 55% 45% 55% 45%; }
 .hero .b-sun { width: 720px; height: 640px; right: -60px; top: 230px; background: var(--sun); z-index: 1; border-radius: 40% 60% 48% 52% / 55% 40% 60% 45%; }
 .hero .b-pink { width: 300px; height: 300px; right: -150px; bottom: 50px; background: linear-gradient(140deg, var(--pink), var(--coral)); z-index: 3; }
@@ -63,7 +62,10 @@ img, svg { display: block; }
 .hero .d3 { width: 36px; height: 36px; left: 3%; bottom: 300px; background: linear-gradient(140deg, #FF8FB0, var(--pink)); z-index: 3; }
 
 .hero .wrap { min-height: 820px; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); align-items: center; }
-.hero-copy { position: relative; z-index: 4; color: #fff; text-align: center; padding: 120px 40px 80px; max-width: 640px; }
+.hero-copy { position: relative; z-index: 4; isolation: isolate; color: #fff; text-align: center; padding: 120px 40px 90px; max-width: 640px; }
+/* The blue shape is drawn by the text block itself, so the white words always sit on it. */
+.hero-copy::before { content: ""; position: absolute; z-index: -1; inset: 0 -70px 0 -150px; background: var(--blue);
+  border-radius: 52% 48% 46% 54% / 44% 50% 50% 56%; }
 .hero h1 { font-weight: 500; font-size: clamp(2.8rem, 5.6vw, 4.6rem); line-height: 1.04; letter-spacing: 0.03em; margin: 0 0 24px; }
 .hero .lede { font-size: 1.2rem; margin: 0 auto 36px; max-width: 30em; }
 .hero .small { font-size: 0.95rem; margin: 18px 0 0; opacity: 0.9; }
@@ -159,7 +161,7 @@ img, svg { display: block; }
   .button.outline { min-height: 44px; padding: 0 20px; font-size: 0.8rem; }
   .hero { min-height: 0; margin-top: -88px; padding-top: 88px; }
   .hero .wrap { grid-template-columns: 1fr; min-height: 0; }
-  .hero .b-blue { width: 150vw; height: 620px; left: -25vw; top: 70px; }
+  .hero-copy::before { inset: -30px -26vw -10px -26vw; border-radius: 50% 50% 48% 52% / 20% 20% 16% 16%; }
   .hero .b-teal { width: 260px; height: 220px; left: auto; right: -70px; top: 640px; }
   .hero .b-sun { width: 120vw; height: 500px; right: -40vw; top: 730px; }
   .hero .b-pink { width: 160px; height: 160px; right: -90px; bottom: 120px; }
@@ -188,4 +190,11 @@ img, svg { display: block; }
 }
 @media (prefers-reduced-motion: no-preference) and (max-width: 760px) {
   @keyframes settle { from { transform: translateY(40px) rotate(0deg); opacity: 0; } }
+}
+
+/* Small phones */
+@media (max-width: 360px) {
+  .brand { font-size: 1.25rem; }
+  .brand svg { width: 34px; height: 34px; }
+  .button.outline { padding: 0 14px; letter-spacing: 0.08em; }
 }
